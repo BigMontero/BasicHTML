@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING SARK</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #000000;
+            --secondary: #FF0000;
+            --accent: #FFD700;
+            --text: #333333;
+            --light: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        header .container {
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.8s ease-out;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        
+        h3 {
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.6rem;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        h3::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: 80%;
+            width: 5px;
+            background-color: var(--secondary);
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .highlight {
+            background-color: rgba(255, 215, 0, 0.2);
+            padding: 1rem;
+            border-left: 3px solid var(--accent);
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        li::before {
+            content: "•";
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+        
+        /* Video Section */
+        .video-section {
+            background-color: var(--primary);
+            padding: 3rem 0;
+            margin: 3rem 0;
+            color: white;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .video-info h2 {
+            color: var(--accent);
+            border-bottom: none;
+        }
+        
+        /* Properties Grid */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 2rem;
+        }
+        
+        .property-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .property-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .property-card:hover .property-image img {
+            transform: scale(1.05);
+        }
+        
+        .property-details {
+            padding: 1.5rem;
+        }
+        
+        .property-details h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!--A presentation of the life and career of an African music composer
+    and also an icon in the musical space.-->
+</head>
+<body>
+    <header>
+        <div class="header-overlay"></div>
+        <div class="container">
+            <h1>SARKODIE</h1>
+            <p class="tagline">The King of African Rap</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#career"><i class="fas fa-microphone"></i> Career</a></li>
+            <li><a href="#brands"><i class="fas fa-briefcase"></i> Brands</a></li>
+            <li><a href="#awards"><i class="fas fa-trophy"></i> Awards</a></li>
+            <li><a href="#properties"><i class="fas fa-home"></i> Properties</a></li>
+            <li><a href="#gallery"><i class="fas fa-camera"></i> Gallery</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <section id="about" class="section">
+                <h2>About The Legend</h2>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="Image/Sarkodieimage1.webp" alt="Sarkodie portrait">
+                        <div class="gallery-caption">Sarkodie - The African Rap Legend</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Image/SarkodieImage2.1.jpg" alt="Sarkodie performing">
+                        <div class="gallery-caption">Electric Stage Performances</div>
+                    </div>
+                </div>
+                
+                <h3>Personal Life</h3>
+                <p><strong>Full Name:</strong> Michael Owusu Addo</p>
+                <p><strong>Age:</strong> Born on July 10, 1985 (currently 38 years old)</p>
+                <p><strong>Religion:</strong> Sarkodie is a devout Christian who often references his faith in his music and public appearances.</p>
+                
+                <h3>Marriage & Family</h3>
+                <p>Sarkodie is married to Tracy Owusu Addo (née Sarkcess), a successful businesswoman. The couple tied the knot in a private ceremony in 2018 after years of dating.</p>
+                <p>They are blessed with two children - a daughter named Titi and a son named Michael Owusu Addo Jnr. Sarkodie often shares glimpses of his family life on social media, showing his dedication as a family man.</p>
+                
+                <h3>Background</h3>
+                <p>Sarkodie was born in Tema, Ghana, to a mother from Kwahu and a father from Konongo. He grew up in Tema Community 7 and attended Tema Methodist Day Senior High School.</p>
+                <p>His interest in music began at an early age, influenced by both Ghanaian highlife and international hip-hop artists. He started writing his own lyrics while still in school, honing his craft through local rap battles and performances.</p>
+            </section>
+            
+            <section id="career" class="section">
+                <h2>Music Career</h2>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sarkodie in concert">
+                        <div class="gallery-caption">Sarkodie commanding the stage</div>
+                    </div>
+                </div>
+
+                 <h3>How He Started</h3>
+                <p>Sarkodie's professional music career began in 2005 when he started performing at local shows and collaborating with other underground artists in Tema and Accra.</p>
+                
+                <p>His breakthrough came in 2009 when he was featured on the song "Baby" by Ghanaian musician Castro, which became a nationwide hit. This exposure led to the release of his debut album "Makye" later that year.</p>
+                
+                <div class="highlight">
+                    <p>"I used to rap for free, just for the love of it. My breakthrough came when I decided to be authentically Ghanaian in my music - rapping in Twi changed everything for me."</p>
+                </div>
+                
+                <h3>Career Highlights</h3>
+                <ul>
+                    <li>2009: Released debut album "Makye"</li>
+                    <li>2012: "Rapperholic" album with hit single "Adonai"</li>
+                    <li>2014: First BET Award for Best International Act: Africa</li>
+                    <li>2016: Launched Sark Clothing line</li>
+                    <li>2019: Named Artist of the Decade at Ghana Music Awards</li>
+                    <li>2022: Headlined Afrochella festival</li>
+                    <li>2024: Released collaborative album with international artists</li>
+                </ul>
+            </section>
+
+            <section id="brands" class="section">
+                <h2>Brand Endorsements</h2>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="Image/sarkodie3.jpg" alt="Sarkodie brand deal">
+                        <div class="gallery-caption">Sarkodie at brand launch</div>
+                    </div>
+                </div>
+                
+                <p>Sarkodie has been the face of several major brands throughout his career, leveraging his massive influence across Africa:</p>
+                
+                <h3>Current Brand Partnerships</h3>
+                <ul>
+                    <li><strong>MTN Ghana:</strong> Longest standing brand ambassador since 2013</li>
+                    <li><strong>Puma Africa:</strong> Official sports apparel partner since 2021</li>
+                    <li><strong>Ghana Tourism Authority:</strong> Face of "Experience Ghana" campaign</li>
+                    <li><strong>Guinness Ghana:</strong> Partnership for music development programs</li>
+                    <li><strong>Samsung West Africa:</strong> Brand ambassador for mobile devices</li>
+                </ul>
+                
+                <h3>Owned Ventures</h3>
+                <ul>
+                    <li><strong>Sark by Yas:</strong> Premium clothing line</li>
+                    <li><strong>SarkCess Music:</strong> Record label nurturing new talent</li>
+                    <li><strong>Sarkodie Foundation:</strong> Education and youth empowerment NGO</li>
+                </ul>
+            </section>
+
+            <section id="awards" class="section">
+                <h2>Awards & Achievements</h2>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="Image/Sarkodie 4.jpeg" alt="Sarkodie with awards">
+                        <div class="gallery-caption">Sarkodie's award collection</div>
+                    </div>
+                </div>
+                
+                <p>Sarkodie is arguably the most awarded African rapper of all time with over 100 awards to his name:</p>
+                
+                <h3>International Accolades</h3>
+                <ul>
+                    <li>BET Award for Best International Act: Africa (2012, 2019)</li>
+                    <li>AFRIMMA Award for Best Rap Act (2014, 2015, 2017, 2020)</li>
+                    <li>MTV Africa Music Awards for Best Hip Hop (2014, 2016, 2021)</li>
+                    <li>BBC Radio 1Xtra Best African Act (2017)</li>
+                    <li>Billboard Magazine Top 10 Rappers of the Decade (2020)</li>
+                </ul>
+                
+                <h3>Ghanaian Honors</h3>
+                <ul>
+                    <li>Ghana Music Awards - Artist of the Decade (2019)</li>
+                    <li>Vodafone Ghana Music Awards - Artiste of the Year (2010, 2012, 2019, 2022)</li>
+                    <li>3Music Awards - Rap Act of the Year (2020, 2021, 2023, 2024)</li>
+                    <li>Ghana Music Honors - Lifetime Achievement Award (2023)</li>
+                </ul>
+
+                <div class="highlight">
+                    <p>In 2024, Sarkodie was honored with a key to the city of Atlanta, Georgia for his contributions to African music and culture.</p>
+                </div>
+            </section>
+            
+            <section id="properties" class="section">
+                <h2>Sarkodie's Properties</h2>
+                
+                <p>Through his successful music career and business ventures, Sarkodie has acquired several luxurious properties:</p>
+                
+                <div class="properties-grid">
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="East Legon mansion">
+                        </div>
+                        <div class="property-details">
+                            <h4>East Legon Mansion</h4>
+                            <p>A luxurious 6-bedroom mansion in Accra's most exclusive neighborhood, featuring a home studio, gym, and swimming pool.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Kwahu holiday home">
+                        </div>
+                        <div class="property-details">
+                            <h4>Kwahu Holiday Home</h4>
+                            <p>Mountaintop retreat in Kwahu with panoramic views, used for family vacations and creative retreats.</p>
+                        </div>
+                    </div>
+
+                     <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="SarkCess HQ">
+                        </div>
+                        <div class="property-details">
+                            <h4>SarkCess Headquarters</h4>
+                            <p>State-of-the-art office complex in East Legon housing his record label, clothing business, and foundation.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+</body>
+</html>
